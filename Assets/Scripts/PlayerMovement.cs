@@ -48,9 +48,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, .1f, groundMask);
 
-        if (controller.isGrounded && velocity.y < 0){
+        if (isGrounded && velocity.y < 0){
             velocity.y = -2f;
         }
 
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right*x+transform.forward*z;
         controller.Move(move*currSpeed*Time.deltaTime);
 
-        if (Input.GetKeyDown("e") && controller.isGrounded){
+        if (Input.GetKeyDown("e") && isGrounded){
             velocity.y = currJumpHeight;
         }
 
