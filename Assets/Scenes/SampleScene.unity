@@ -603,7 +603,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8557294, b: 0.46226418, a: 1}
   m_Intensity: 1
-  m_Range: 50
+  m_Range: 100
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -663,7 +663,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &826409975
 GameObject:
@@ -1256,7 +1256,7 @@ Transform:
   - {fileID: 1727348787}
   - {fileID: 154337512}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1313807515
 Rigidbody:
@@ -1334,7 +1334,7 @@ Transform:
   m_GameObject: {fileID: 1385982713}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1389414552}
   - {fileID: 2007717717}
@@ -1351,7 +1351,7 @@ Transform:
   - {fileID: 1570327503}
   - {fileID: 1094708716}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1389414548
 GameObject:
