@@ -9,9 +9,18 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
     public float gravity = -20f;
     public float jumpHeight = 2f;
+<<<<<<< HEAD
     public float jumpBufferTime = 0.2f;
     public float groundDistance = 0.2f;
     public Transform groundCheck;
+=======
+    public float jumpBufferDelay = 0.2f;
+    public float groundDistance = 0.2f;
+    public float ammoReloadDelay = 5f;
+    public Transform groundCheck;
+    public Transform shootPos;
+    public GameObject potato;
+>>>>>>> main
     public LayerMask groundMask;
 
     bool potatoed;
@@ -19,7 +28,13 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     float currSpeed;
     float currJumpHeight;
+<<<<<<< HEAD
     public float jumpBuffer = 0f;
+=======
+    float jumpBuffer = 0f;
+    GameObject currPotato;
+    float ammoReload;
+>>>>>>> main
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0){
-            velocity.y = -2f;
+            velocity.y = -10f;
         }
 
         float x = Input.GetAxis("Horizontal");
@@ -63,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
             jumpBuffer -= Time.deltaTime;
         }
         if (Input.GetKeyDown("e")){
+<<<<<<< HEAD
             jumpBuffer = jumpBufferTime;
         }
 
@@ -70,6 +86,15 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = currJumpHeight;
         }
 
+=======
+            jumpBuffer = jumpBufferDelay;
+        }
+
+        if (jumpBuffer > 0f && isGrounded){
+            velocity.y = currJumpHeight;
+        }
+
+>>>>>>> main
         if (Input.GetKeyDown("f")){
             if (potatoed)
                 PotateOff();
@@ -80,5 +105,27 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity*Time.deltaTime;
 
         controller.Move(velocity*Time.deltaTime);
+
+        if (potatoed){
+            ammoReload -= Time.deltaTime;
+            if (ammoReload <= 0f){
+                if (currPotato){
+                    Destroy(currPotato);
+                }
+                if (Input.GetAxisRaw("Fire1") != 0){
+                    currPotato = Instantiate(potato, shootPos.position, GetComponent<MouseLook>().camera.transform.rotation);
+                    currPotato.GetComponent<Rigidbody>().AddForce(currPotato.transform.forward*1000f);
+                    ammoReload = ammoReloadDelay;
+                }
+            }
+        }
+    }
+
+    void OnCollisionEnter(Collision col){
+        if (col.gameObject.tag == "Potato"){
+            if(!potatoed){
+                PotateOn();
+            }
+        }
     }
 }
