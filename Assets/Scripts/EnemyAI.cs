@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour
 
 	public Transform Player;
 
+	public GameObject PotatoShooter;
+
 	public CharacterController controller;
 
 	public GameObject Potato;
@@ -44,7 +46,7 @@ public class EnemyAI : MonoBehaviour
 		{
 			Patroling();
 		}
-		if (CanSeePlayerInRange && !CanAttackPlayerInRange)
+		if (CanSeePlayerInRange)
 		{
 			ChasePlayer();
 		}
@@ -88,8 +90,6 @@ public class EnemyAI : MonoBehaviour
 		{
 			walkPointSet = true;
 		}
-
-
 	}
 
 	private void ChasePlayer()
@@ -106,8 +106,9 @@ public class EnemyAI : MonoBehaviour
 		if (!hasAttacked)
 		{
 			//Shoot bean man :o
-			Rigidbody rb = Instantiate(Potato, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+			Rigidbody rb = Instantiate(Potato, PotatoShooter.transform.position, Quaternion.identity).GetComponent<Rigidbody>();
 			rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+			rb.AddForce(transform.up * 32f, ForceMode.Impulse);
 
 			//Makes the potato shoot again - potatoessss
 			hasAttacked = true;
