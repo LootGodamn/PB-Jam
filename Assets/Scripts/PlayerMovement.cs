@@ -9,18 +9,17 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
     public float gravity = -20f;
     public float jumpHeight = 2f;
-
-    float currSpeed;
-    float currJumpHeight;
-
-    public Transform groundCheck;
+    public float jumpBufferTime = 0.2f;
     public float groundDistance = 0.2f;
+    public Transform groundCheck;
     public LayerMask groundMask;
 
     bool potatoed;
-
     Vector3 velocity;
-    public bool isGrounded;
+    bool isGrounded;
+    float currSpeed;
+    float currJumpHeight;
+    public float jumpBuffer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, .1f, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (isGrounded && velocity.y < 0){
             velocity.y = -2f;
@@ -60,7 +59,14 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right*x+transform.forward*z;
         controller.Move(move*currSpeed*Time.deltaTime);
 
-        if (Input.GetKeyDown("e") && isGrounded){
+        if (jumpBuffer > 0f){
+            jumpBuffer -= Time.deltaTime;
+        }
+        if (Input.GetKeyDown("e")){
+            jumpBuffer = jumpBufferTime;
+        }
+
+        if (jumpBuffer > 0f && isGrounded){
             velocity.y = currJumpHeight;
         }
 
