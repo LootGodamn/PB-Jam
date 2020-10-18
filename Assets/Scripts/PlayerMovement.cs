@@ -9,18 +9,12 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 12f;
     public float gravity = -20f;
     public float jumpHeight = 2f;
-<<<<<<< HEAD
-    public float jumpBufferTime = 0.2f;
-    public float groundDistance = 0.2f;
-    public Transform groundCheck;
-=======
     public float jumpBufferDelay = 0.2f;
     public float groundDistance = 0.2f;
     public float ammoReloadDelay = 5f;
     public Transform groundCheck;
     public Transform shootPos;
     public GameObject potato;
->>>>>>> main
     public LayerMask groundMask;
 
     bool potatoed;
@@ -28,13 +22,9 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     float currSpeed;
     float currJumpHeight;
-<<<<<<< HEAD
-    public float jumpBuffer = 0f;
-=======
     float jumpBuffer = 0f;
     GameObject currPotato;
     float ammoReload;
->>>>>>> main
 
     // Start is called before the first frame update
     void Start()
@@ -78,15 +68,6 @@ public class PlayerMovement : MonoBehaviour
             jumpBuffer -= Time.deltaTime;
         }
         if (Input.GetKeyDown("e")){
-<<<<<<< HEAD
-            jumpBuffer = jumpBufferTime;
-        }
-
-        if (jumpBuffer > 0f && isGrounded){
-            velocity.y = currJumpHeight;
-        }
-
-=======
             jumpBuffer = jumpBufferDelay;
         }
 
@@ -94,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = currJumpHeight;
         }
 
->>>>>>> main
         if (Input.GetKeyDown("f")){
             if (potatoed)
                 PotateOff();
